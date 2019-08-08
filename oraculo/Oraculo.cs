@@ -9,7 +9,6 @@ namespace oraculo
     class Oraculo
     {
         ConnectionMultiplexer redis;
-        string connString = "localhost";
         string topic = "Perguntas";
         int n = 0;
 

@@ -11,6 +11,8 @@ namespace oraculo
 
             string host = (args.Length > 0) ? args[0] : "localhost";
 
+            Console.WriteLine("Conectado a " + host);
+
             var oracle = new Oraculo(host);
 
             int tempoEspera = 15000;
