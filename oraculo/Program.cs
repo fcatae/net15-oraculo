@@ -18,7 +18,7 @@ namespace oraculo
 
             var oracle = new Oraculo(host);
 
-            int tempoEspera = 1500;
+            int tempoEspera = 8000;
 
             int i = 0;
 
