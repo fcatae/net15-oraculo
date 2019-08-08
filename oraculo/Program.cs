@@ -9,6 +9,8 @@ namespace oraculo
         {
             Console.WriteLine("Oraculo");
 
+            string host = (args.Length > 0) ? args[0] : "localhost";
+
             var oracle = new Oraculo();
 
             int tempoEspera = 5000;
