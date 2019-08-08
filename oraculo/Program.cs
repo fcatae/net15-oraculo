@@ -1,5 +1,4 @@
 ﻿using System;
-using StackExchange.Redis;
 using System.Threading;
 
 namespace oraculo
@@ -8,25 +7,19 @@ namespace oraculo
     {
         static void Main(string[] args)
         {
-            string connString = "localhost";
-            string topic = "Perguntas";
-
             Console.WriteLine("Oraculo");
 
-            var redis = ConnectionMultiplexer.Connect(connString);
+            var oracle = new Oraculo();
 
-            var pub = redis.GetSubscriber();
-
-            int n = 1;
+            int tempoEspera = 5000;
             string texto = "Qual a capital do Brasil?";
 
             while(true)
             {
-                string pergunta = $"P{n}: {texto}";
-                pub.Publish(topic, pergunta);
+                string pergunta = oracle.Perguntar(texto);
                 Console.WriteLine(pergunta);
 
-                Thread.Sleep(5000);
+                Thread.Sleep(tempoEspera);
                 Console.WriteLine();
             }
         }
