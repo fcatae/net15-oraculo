@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using StackExchange.Redis;
 
@@ -10,21 +11,39 @@ namespace oraculo
         ConnectionMultiplexer redis;
         string connString = "localhost";
         string topic = "Perguntas";
-        int n = 1;
+        int n = 0;
 
-        public Oraculo()
+        public Oraculo(string connString)
         {
             redis = ConnectionMultiplexer.Connect(connString);
         }
 
         public string Perguntar(string texto)
         {
+            n++;
+
             var pub = redis.GetSubscriber();
 
-            string pergunta = $"P{n++}: {texto}";
+            string pergunta = $"P{n}: {texto}";
             pub.Publish(topic, pergunta);
 
             return pergunta;
+        }
+
+        public Resposta[] LerRespostas()
+        {
+            var db = redis.GetDatabase();
+
+            string key = $"P{n}";
+
+            var respostas = db.HashGetAll(key)
+                .Select(v => new Resposta
+                {
+                    Equipe = v.Name,
+                    Texto = v.Value
+                }).ToArray();
+
+            return respostas;
         }
     }
 }

@@ -11,9 +11,9 @@ namespace oraculo
 
             string host = (args.Length > 0) ? args[0] : "localhost";
 
-            var oracle = new Oraculo();
+            var oracle = new Oraculo(host);
 
-            int tempoEspera = 5000;
+            int tempoEspera = 15000;
             string texto = "Qual a capital do Brasil?";
 
             while(true)
