@@ -24,6 +24,13 @@ namespace oraculo
                 Console.WriteLine(pergunta);
 
                 Thread.Sleep(tempoEspera);
+
+                var respostas = oracle.LerRespostas();
+                foreach(var resp in respostas)
+                {
+                    Console.WriteLine($"{resp.Equipe}: {resp.Texto}");
+                }
+
                 Console.WriteLine();
             }
         }
