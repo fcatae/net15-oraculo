@@ -20,6 +20,9 @@ namespace oraculo
         public string Perguntar(string texto)
         {
             n++;
+            var db = redis.GetDatabase();
+            string key = $"P{n}";
+            db.KeyDelete(key);
 
             var pub = redis.GetSubscriber();
 

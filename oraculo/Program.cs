@@ -5,6 +5,9 @@ namespace oraculo
 {
     class Program
     {
+        static string[] lista = {
+        "Brasil", "Uruguai", "Japao", "Equador", "Congo"};
+
         static void Main(string[] args)
         {
             Console.WriteLine("Oraculo");
@@ -15,11 +18,15 @@ namespace oraculo
 
             var oracle = new Oraculo(host);
 
-            int tempoEspera = 15000;
-            string texto = "Qual a capital do Brasil?";
+            int tempoEspera = 1500;
+
+            int i = 0;
 
             while(true)
             {
+                string texto = $"Qual a capital do {lista[i % lista.Length]}?";
+                i++;
+
                 string pergunta = oracle.Perguntar(texto);
                 Console.WriteLine(pergunta);
 
